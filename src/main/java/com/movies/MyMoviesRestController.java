@@ -33,13 +33,15 @@ public class MyMoviesRestController {
 	@RequestMapping(method = RequestMethod.GET)
 	private List<MovieDto> getMovie(@RequestParam MultiValueMap<String, String> requestParams) {
 		//transform requestParams to requestDto
+		LOG.info("Got the GET request :: ");
 		return dataAccessService.search(RequestUtils.getRequest(requestParams));
 	}
 	
 	//Update a movie
+	@OverallLatency
 	@RequestMapping(method = RequestMethod.PUT)
 	private String updateMovie(@RequestBody final MovieDto movieDto) {
-		LOG.info("Got the create request :: "+movieDto.getName());
+		LOG.info("Got the update request :: "+movieDto.getName());
 		dataAccessService.update(movieDto);
 		return movieDto.getName() + " updated";
 	}
@@ -48,6 +50,7 @@ public class MyMoviesRestController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	private void deleteMovie(@RequestParam MultiValueMap<String, String> requestParams) {
 		//transform requestParams to requestDto
+		LOG.info("Got the delete request :: ");
 		dataAccessService.delete(RequestUtils.getRequest(requestParams));
 	}
 	

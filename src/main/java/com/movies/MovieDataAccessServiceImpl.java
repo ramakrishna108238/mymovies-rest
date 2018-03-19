@@ -31,6 +31,8 @@ public class MovieDataAccessServiceImpl implements DataAccessService {
 
 	@Override
 	public void create(MovieDto movieDto) {
+		//Invalid Data
+		//then Throw exception to controller
 		Query criteriaQuery = new Query();
 		criteriaQuery.addCriteria(Criteria.where("name").is(movieDto.getName()));
 
@@ -70,7 +72,7 @@ public class MovieDataAccessServiceImpl implements DataAccessService {
 	@Override
 	public void delete(RequestDto requestDto) {
 		Query criteriaQuery = buildCriteriaQuery(requestDto);
-		mongoTemplate.findAndRemove(criteriaQuery, MovieDto.class);
+		mongoTemplate.remove(criteriaQuery,  "Movies_Collection");
 	}
 
 	@Override
